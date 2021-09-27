@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
+import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,13 +18,12 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun loadMeme(){
-        val currentImageUrl = "https://i.redd.it/5t2246khdwp71.png"
+        val currentImageUrl = "https://meme-api.herokuapp.com/gimme"
 
         val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, currentImageUrl, null,
             { response ->
                 val url = response.getString("url")
-
-
+                Glide.with(this).load(url).into(imageView)
 
             },
             { error ->
@@ -40,7 +41,6 @@ class MainActivity : AppCompatActivity() {
 
     }
     fun nextMeme(view: android.view.View) {
-        
     }
 
 }
